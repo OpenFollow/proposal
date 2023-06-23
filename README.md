@@ -28,8 +28,6 @@ This same workflow could be accomplished in a distributed system using a common 
 
 5. When Alice clicks on a "follow", "like", or "boost" button, the scripts hosted by OpenFollow.org ARE able to retrieve Alice's stored credentials and metadata.  This information is used to redirect Alice to a confirmation page on her home server that will be pre-populated with Bob's profile URL (or page URL, or whatever the intent requires).  Alice can confirm her follow or like, and the process is complete.
 
-
-
 ### Forthcoming Browser APIs
 
 There is an experimental browser API called [FederatedCredentials](https://caniuse.com/mdn-api_federatedcredential) that has the potential to address this use case at the browser level.  This would be a very good thing.
@@ -37,3 +35,13 @@ There is an experimental browser API called [FederatedCredentials](https://caniu
 Unfortunately, FederatedCredentials is not supported outside of Chrome and Edge, so it cannot be depended upon as a global solution.  
 
 However, OpenFollow.org could be used as a sort of polyfill that eases access  into this API if it is available, and falls back on its own localStorage mechanism otherwise.
+
+## Some Details
+
+* OpenFollow should support multiple identities, so that a user can be signed in to multiple services on a single browser.  In this case, the Follow/Like/Boost buttons should give the user a choice about which service to forward to.
+
+* Users should also have the ability to "sign out" and remove OpenFollow metadata from their browser.
+
+## Potential Pitfalls
+
+* A malicious website might "fake" an OpenFollow signin, leaving forwarding information in their browser for later.  If the user later likes a piece of content, they could be redirected to a malicious address.  How best to prevent malicious sites from leaving "spam" in the OpenFollow directory.
